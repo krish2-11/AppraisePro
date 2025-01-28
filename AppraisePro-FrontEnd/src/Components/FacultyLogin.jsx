@@ -33,7 +33,7 @@ const FacultyLogin = () => {
                   if(response.data == "Authenticated User"){
                     setError(false)
                     toast.success("Authentication Successful!")
-                    navigate("/faculty")
+                    navigate("/faculty/home")
                   }
                   else if(response.data == "Authenticated User First"){
                     setError(false)

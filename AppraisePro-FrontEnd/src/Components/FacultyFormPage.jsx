@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import '../Design/FacultyPage.css'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const FacultyFormPage = () => {
 
@@ -33,8 +34,11 @@ const FacultyFormPage = () => {
     credentials: null
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
@@ -47,7 +51,7 @@ const FacultyFormPage = () => {
     try {
       const response = await axios.post("http://localhost:8080/api/faculty/saveDetails", formData);
       console.log("Data submitted successfully:", response.data);
-      alert("Faculty data saved successfully!");
+      navigate("/faculty/dashboard")
     } catch (error) {
       console.error("Error submitting data:", error);
       alert("Failed to save faculty data!");
@@ -64,15 +68,15 @@ const FacultyFormPage = () => {
             <div className="faculty-form-grid">
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Short Name</label>
-                    <input type="text" className="form-input" name="shortname" onChange={handleChange} />
+                    <input type="text" className="form-input" name="shortname" required onChange={handleChange} />
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">First Name</label>
-                    <input type="text" className="form-input" name="firstname"  onChange={handleChange}/>
+                    <input type="text" className="form-input" name="firstname" required onChange={handleChange}/>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Last Name</label>
-                    <input type="text" className="form-input" name="lastname" onChange={handleChange} />
+                    <input type="text" className="form-input" name="lastname" required onChange={handleChange} />
                 </div>
             </div>
         </div>
@@ -82,11 +86,11 @@ const FacultyFormPage = () => {
             <div className="faculty-form-grid">
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Father's Name</label>
-                    <input type="text" className="form-input" name="fathersname" onChange={handleChange}/>
+                    <input type="text" className="form-input" name="fathersname" required onChange={handleChange}/>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Mother's Name</label>
-                    <input type="text" className="form-input" name="mothersname" onChange={handleChange}/>
+                    <input type="text" className="form-input" name="mothersname" required onChange={handleChange}/>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label">Spouse Name</label>
@@ -100,46 +104,46 @@ const FacultyFormPage = () => {
             <div className="faculty-form-grid">
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Religion</label>
-                    <select className="faculty-form-select" name="religion" onChange={handleChange}>
+                    <select className="faculty-form-select" name="religion" required onChange={handleChange}>
                         <option value="">Select Religion</option>
-                        <option value="hindu">Hindu</option>
-                        <option value="muslim">Muslim</option>
-                        <option value="christian">Christian</option>
-                        <option value="sikh">Sikh</option>
-                        <option value="other">Other</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Muslim">Muslim</option>
+                        <option value="Christian">Christian</option>
+                        <option value="Sikh">Sikh</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Category</label>
-                    <select className="faculty-form-select" name="category" onChange={handleChange}>
+                    <select className="faculty-form-select" name="category" required onChange={handleChange}>
                         <option value="">Select Category</option>
-                        <option value="general">General</option>
-                        <option value="obc">OBC</option>
-                        <option value="sc">SC</option>
-                        <option value="st">ST</option>
-                        <option value="other">Other</option>
+                        <option value="General">General</option>
+                        <option value="OBS">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Gender</label>
                     <div className="radio-group">
                         <label className="radio-label">
-                            <input type="radio" name="gender" value="male" onChange={handleChange}/>
+                            <input type="radio" name="gender" value="Male" onChange={handleChange}/>
                             Male
                         </label>
                         <label className="radio-label">
-                            <input type="radio" name="gender" value="female"  onChange={handleChange} />
+                            <input type="radio" name="gender" value="Female"  onChange={handleChange} />
                             Female
                         </label>
                         <label className="radio-label">
-                            <input type="radio" name="gender" value="other" onChange={handleChange}/>
+                            <input type="radio" name="gender" value="Other" onChange={handleChange}/>
                             Other
                         </label>
                     </div>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Birth Date</label>
-                    <input type="date" className="date-input" name="birthday" onChange={handleChange}/>
+                    <input type="date" className="date-input" name="birthday" required onChange={handleChange}/>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label">Blood Group</label>
@@ -159,10 +163,10 @@ const FacultyFormPage = () => {
                     <label className="faculty-form-label">Marital Status</label>
                     <select className="faculty-form-select" name="maritalStatus" onChange={handleChange}>
                         <option value="">Select Status</option>
-                        <option value="single">Single</option>
-                        <option value="married">Married</option>
-                        <option value="divorced">Divorced</option>
-                        <option value="widowed">Widowed</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
                     </select>
                 </div>
             </div>
@@ -173,9 +177,10 @@ const FacultyFormPage = () => {
             <div className="faculty-form-grid">
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Country</label>
-                    <select className="faculty-form-select" name="country" onChange={handleChange}>
+                    <select className="faculty-form-select" name="country" required onChange={handleChange}>
                         <option value="">Select Country</option>
-                        <option value="india">India</option>
+                        <option value="India">India</option>
+                        <option value="Outside India">Outside India</option>
                     </select>
                 </div>
                 <div className="faculty-form-group">
@@ -198,7 +203,7 @@ const FacultyFormPage = () => {
             <div className="faculty-form-grid">
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Phone</label>
-                    <input type="text" className="form-input" name="phone" onChange={handleChange}/>
+                    <input type="text" className="form-input" name="phone" required onChange={handleChange}/>
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label">Secondary phone</label>
@@ -206,7 +211,7 @@ const FacultyFormPage = () => {
                 </div>
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Personal Email</label>
-                    <input type="text" className="form-input" name="personalemail" onChange={handleChange}/>
+                    <input type="text" className="form-input" name="personalemail" required onChange={handleChange}/>
                 </div>
             </div>
         </div>
@@ -220,8 +225,14 @@ const FacultyFormPage = () => {
                 </label>
             </div>
         </div>
-
-        <button className="submit-btn">Submit</button>
+        {/* <div className="faculty-form-section">
+            <h2 className="section-title">Additional Information</h2>
+            <div className="faculty-form-group">
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+      <button type="submit">Upload</button>
+      </div>
+        </div> */}
+        <button className="submit-btn" >Submit</button>
     </form>
 </div>
     <Footer />

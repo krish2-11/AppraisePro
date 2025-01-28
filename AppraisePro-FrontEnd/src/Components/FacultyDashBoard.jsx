@@ -2,7 +2,7 @@ import React from 'react'
 import { useState , useEffect} from 'react';
 import '../Design/FacultyDashBoard.css'
 import axios from 'axios'
-
+import '../Design/FacultyHomepage.css'
 const FacultyDashBoard = () => {
     const getEmail =sessionStorage.getItem('email')
     const [faculty, setFaculty] = useState({});
@@ -10,12 +10,11 @@ const FacultyDashBoard = () => {
     useEffect(() => {
       const fetchFaculty = async () => {
         try {
-            console.log(`==${getEmail}==`)
-            axios.post('http://localhost:8080/api/faculty/detail', getEmail)
+            axios.post('http://localhost:8080/login/faculty/detail', getEmail)
             .then((response) => {
-                axios.get("http://localhost:8080/api/faculty/getfaculty").then((res) =>{
-                    console.log(res.data)
-                    setFaculty(res.data);
+                axios.get("http://localhost:8080/login/faculty/getfaculty").then((res) =>{
+                  console.log(res.data)
+                  setFaculty(res.data)
                 })
             })
             .catch((e) => {
@@ -29,59 +28,60 @@ const FacultyDashBoard = () => {
       fetchFaculty();
     }, []);
   return (
+    <>
     <div className="dashboard-container">
     <div className="profile-section">
       <div className="profile-photo">
         <img src="profile-photo.jpg" alt="Faculty Photo" />
       </div>
       <div className="profile-details">
-        <h1>John Doe</h1>
-        <p className="shortname">Prof. J. Doe</p>
-        <p className="email">johndoe@example.com</p>
+        <h1>{faculty.firstname} {faculty.lastname}</h1>
+        <p className="shortname">{faculty.shortname}</p>
+        <p className="email">{faculty.email}</p>
       </div>
     </div>
 
     <div className="info-section">
       <h2>Basic Information</h2>
-      <div className="info">
-        <p><strong>First Name:</strong> John</p>
-        <p><strong>Last Name:</strong> Doe</p>
-        <p><strong>Father's Name:</strong> Richard Doe</p>
-        <p><strong>Mother's Name:</strong> Mary Doe</p>
-        <p><strong>Spouse Name:</strong> Jane Doe</p>
+      <div className="profile-info">
+        <p><strong>First Name:</strong> {faculty.firstname}</p>
+        <p><strong>Last Name:</strong> {faculty.lastname}</p>
+        <p><strong>Father's Name:</strong>{faculty.fathersname}</p>
+        <p><strong>Mother's Name:</strong>{faculty.mothersname}</p>
+        <p><strong>Spouse Name:</strong>{faculty.spousename}</p>
       </div>
 
       <h2>Personal Details</h2>
-      <div className="info">
-        <p><strong>Religion:</strong> Hindu</p>
-        <p><strong>Category:</strong> General</p>
-        <p><strong>Gender:</strong> Male</p>
-        <p><strong>Date of Birth:</strong> 1985-10-15</p>
-        <p><strong>Blood Group:</strong> O+</p>
-        <p><strong>Marital Status:</strong> Married</p>
+      <div className="profile-info">
+        <p><strong>Religion:</strong> {faculty.religion}</p>
+        <p><strong>Category:</strong> {faculty.category}</p>
+        <p><strong>Gender:</strong> {faculty.gender}</p>
+        <p><strong>Date of Birth:</strong>{faculty.birthday}</p>
+        <p><strong>Blood Group:</strong>{faculty.bloodgroup}</p>
+        <p><strong>Marital Status:</strong>{faculty.maritalStatus}</p>
       </div>
 
       <h2>Location Information</h2>
-      <div className="info">
-        <p><strong>Country:</strong> India</p>
-        <p><strong>Caste:</strong> General</p>
-        <p><strong>Hometown:</strong> Mumbai</p>
-        <p><strong>Birthplace:</strong> Mumbai</p>
+      <div className="profile-info">
+        <p><strong>Country:</strong> {faculty.country}</p>
+        <p><strong>Caste:</strong> {faculty.caste}</p>
+        <p><strong>Hometown:</strong> {faculty.hometown}</p>
+        <p><strong>Birthplace:</strong> {faculty.birthplace}</p>
       </div>
 
       <h2>Contact Information</h2>
-      <div className="info">
-        <p><strong>Phone:</strong> 123-456-7890</p>
-        <p><strong>Secondary Phone:</strong> 098-765-4321</p>
-        <p><strong>Personal Email:</strong> johndoe@gmail.com</p>
+      <div className="profile-info">
+        <p><strong>Phone:</strong>{faculty.phone}</p>
+        <p><strong>Secondary Phone:</strong>{faculty.secondaryphone}</p>
+        <p><strong>Personal Email:</strong>{faculty.personalemail}</p>
       </div>
 
       <h2>Additional Information</h2>
-      <div className="info">
-        <p><strong>Person with Disability:</strong> No</p>
+      <div className="profile-info">
+        <p><strong>Person with Disability:</strong>{faculty.disable ? "Yes" : "No"}</p>
       </div>
     </div>
-  </div>
+  </div></>
   )
 }
 

@@ -60,7 +60,8 @@
 
 /* Information Section */
 .info-section {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 1rem;
@@ -75,7 +76,8 @@
     grid-column: 1 / -1;
 }
 
-.info {
+.profile-info {
+    width: 100%;
     background: white;
     padding: 1.5rem;
     border-radius: 12px;
@@ -83,12 +85,12 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.info:hover {
+.profile-info:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.info p {
+.profile-info p {
     margin: 0.75rem 0;
     color: #4b5563;
     font-size: 0.95rem;
@@ -99,11 +101,11 @@
     border-bottom: 1px solid #e5e7eb;
 }
 
-.info p:last-child {
+.profile-info p:last-child {
     border-bottom: none;
 }
 
-.info p strong {
+.profile-info p strong {
     color: #1f2937;
     font-weight: 600;
     min-width: 140px;
@@ -137,11 +139,11 @@
         gap: 1rem;
     }
 
-    .info {
+    .profile-info {
         padding: 1rem;
     }
 
-    .info p {
+    .profile-info p {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.25rem;
@@ -160,7 +162,7 @@
     }
 }
 
-.info {
+.profile-info {
     animation: fadeIn 0.3s ease-out forwards;
 }
 
