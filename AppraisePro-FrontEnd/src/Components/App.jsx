@@ -7,16 +7,16 @@ import FacultyFormPage from './FacultyFormPage';
 import ChangePassword from './ChangePassword';
 import FacultyDashBoard from './FacultyDashBoard';
 import FacultyHomePage from './FacultyHomePage';
-import Temporarypage from './Temporarypage';
+import AddPublication from './AddPublication';
 function App() {
   return (
       <>
       <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/temp" element={<Temporarypage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/add" element={<AddFaculty />} />
+            <Route path="/addPublication" element={<AddPublication />} />
             <Route path="/faculty" element={<FacultyFormPage />} />
             <Route path="/faculty/home" element={<FacultyHomePage />} />
             <Route path="/faculty/login" element={<FacultyLogin />} />

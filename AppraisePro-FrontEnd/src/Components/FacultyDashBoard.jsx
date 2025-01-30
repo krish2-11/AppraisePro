@@ -10,10 +10,12 @@ const FacultyDashBoard = () => {
     useEffect(() => {
       const fetchFaculty = async () => {
         try {
-            axios.post('http://localhost:8080/login/faculty/detail', getEmail)
+            axios.post('http://localhost:8080/login/faculty/detail', {
+              email:getEmail,
+              password:""
+            })
             .then((response) => {
                 axios.get("http://localhost:8080/login/faculty/getfaculty").then((res) =>{
-                  console.log(res.data)
                   setFaculty(res.data)
                 })
             })

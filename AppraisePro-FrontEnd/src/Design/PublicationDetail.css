@@ -1,0 +1,116 @@
+.publication-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  
+  .publication-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+  }
+  
+
+.publication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .publication-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  .publication-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .publication-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: #EBF5FF;
+    color: #2563EB;
+    border-radius: 50%;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  
+  .publication-item-title {
+    font-size: 18px;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .publication-faculty-name {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .download-button {
+    padding: 8px 16px;
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .download-button:hover {
+    background-color: #1D4ED8;
+  }
+
+  .accept-button {
+    padding: 8px 16px;
+    background-color: rgb(0, 170, 0);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .accept-button:hover {
+    background-color: #6eff46;
+  }
+
+  .reject-button {
+    padding: 8px 16px;
+    background-color: rgb(199, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .reject-button:hover {
+    background-color: #ff4646;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 640px) {
+    .publication-container {
+      padding: 16px;
+    }
+  
+    .publication-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .download-button {
+      width: 100%;
+      margin-top: 12px;
+    }
+  }

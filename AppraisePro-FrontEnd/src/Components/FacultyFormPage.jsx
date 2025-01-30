@@ -51,7 +51,7 @@ const FacultyFormPage = () => {
     try {
       const response = await axios.post("http://localhost:8080/api/faculty/saveDetails", formData);
       console.log("Data submitted successfully:", response.data);
-      navigate("/faculty/dashboard")
+      navigate("/faculty/home")
     } catch (error) {
       console.error("Error submitting data:", error);
       alert("Failed to save faculty data!");
