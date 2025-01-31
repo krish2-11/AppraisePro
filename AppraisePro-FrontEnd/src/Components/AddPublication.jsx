@@ -49,9 +49,9 @@ const AddPublication = () => {
                   "Content-Type": "multipart/form-data",
                 },
               });
-              alert("File uploaded successfully: " + res.data);
+              toast.success("Request for upload sent successfully");
             } catch (error) {
-              alert("Upload failed!");
+              toast.error("Publication request has made but file Upload failed!");
             }
           })
           .catch((error) => {
@@ -63,10 +63,8 @@ const AddPublication = () => {
         })
       
     } catch (e) {
-      console.error("Error fetching data:", e);
+      toast.error("Error fetching data! Contact Admin");
     }
-
-      
     }
 
 return (

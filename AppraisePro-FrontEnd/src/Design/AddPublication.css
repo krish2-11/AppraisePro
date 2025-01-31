@@ -1,46 +1,95 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  --shadow-elegant: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
 .form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
-  }
-  
-  .form-card {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .form-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #2d3748;
-  }
-  
-  .title-input , .description-input , .pdf-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .submit-button {
-    background-color: #38b2ac;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .submit-button:hover {
-    background-color: #319795;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #f0f4f8, #e6eaf0);
+  perspective: 1000px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: var(--shadow-elegant);
+  padding: 50px;
+  transform-style: preserve-3d;
+  transform: rotateX(5deg) rotateY(-5deg);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.form-card:hover {
+  transform: scale(1.03) rotateX(0) rotateY(0);
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.title-input, 
+.description-input, 
+.pdf-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 25px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: linear-gradient(white, white) padding-box, 
+              var(--primary-gradient) border-box;
+  background-origin: padding-box, border-box;
+  transition: all 0.4s ease;
+  font-size: 1rem;
+}
+
+.title-input:focus, 
+.description-input:focus, 
+.pdf-input:focus {
+  outline: none;
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(106, 17, 203, 0.1);
+}
+
+.pdf-input {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 18px;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  box-shadow: 0 15px 30px rgba(106, 17, 203, 0.3);
+  letter-spacing: 1px;
+}
+
+.submit-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(106, 17, 203, 0.4);
+}
+
+.submit-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
+}

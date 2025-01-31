@@ -31,15 +31,15 @@ const PublicationPage = () => {
         <div className="stats-card">
             <div className="stats-grid">
                 <div className="stat-item">
-                    <h3>42</h3>
+                    <h3>{publications.length}</h3>
                     <p>Total Publications</p>
                 </div>
                 <div className="stat-item">
-                    <h3>15</h3>
+                    <h3>0</h3>
                     <p>Journal Articles</p>
                 </div>
                 <div className="stat-item">
-                    <h3>27</h3>
+                    <h3>0</h3>
                     <p>Conference Papers</p>
                 </div>
             </div>

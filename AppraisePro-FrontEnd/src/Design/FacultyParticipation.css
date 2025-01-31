@@ -40,14 +40,14 @@
     opacity: 0.9;
 }
 
-.addPublication{
+.addDocument{
     display: flex;
     gap:10px;
     flex-direction: row;
     margin-bottom: 30px;
 }
 
-.addPublication button{
+.addDocument button{
 background-color: #38b2ac;
   color: white;
   border: none;
@@ -58,11 +58,11 @@ background-color: #38b2ac;
   transition: background-color 0.3s ease;
 }
 
-.addPublication button:hover{
+.addDocument button:hover{
     background-color: #319795;
 }
 
-.publication-flex{
+.document-flex{
     display: flex;
     flex-direction: column;
     gap: 20px;
