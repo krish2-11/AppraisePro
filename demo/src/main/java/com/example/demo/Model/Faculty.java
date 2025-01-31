@@ -1,10 +1,11 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Faculty {
@@ -35,7 +36,7 @@ public class Faculty {
     public Faculty() {
     }
 
-    public Faculty(String email, String shortname, String firstname, String lastname, String fathersname, String mothersname, String spousename, String religion, String category, String gender, LocalDate birthday, String bloodgroup, String maritalStatus, String country, String caste, String hometown, String birthplace, String phone, String secodaryphone, String personalemail, boolean isDisable, boolean first, Credentials credentials) {
+    public Faculty(String email, String shortname, String firstname, String lastname, String fathersname, String mothersname, String spousename, String religion, String category, String gender, LocalDate birthday, String bloodgroup, String maritalStatus, String country, String caste, String hometown, String birthplace, String phone, String secodaryphone, String personalemail, boolean isDisable, boolean first, Credentials credentials, List<Publication> publication) {
         this.email = email;
         this.shortname = shortname;
         this.firstname = firstname;
@@ -59,6 +60,7 @@ public class Faculty {
         this.isDisable = isDisable;
         this.first = first;
         this.credentials = credentials;
+        this.publicationList = publication;
     }
 
     public String getShortname() {
@@ -247,4 +249,17 @@ public class Faculty {
 
     @OneToOne
     Credentials credentials;
+
+    @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    //@JsonIgnore
+    List<Publication> publicationList;
+
+    public List<Publication> getPublicationList() {
+        return publicationList;
+    }
+
+    public void setPublicationList(List<Publication> publicationList) {
+        this.publicationList = publicationList;
+    }
 }

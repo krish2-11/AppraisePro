@@ -29,7 +29,7 @@ public class FacultyController {
         String email = faculty.getEmail();
         faculty.setFirstname(email);
         int alterIndex = email.indexOf("@");
-        String name = email.substring(0 , alterIndex);
+        String name = email.substring(0, alterIndex);;
         Credentials credentials = new Credentials(name , email);
         faculty.setCredentials(credentials);
         credentialsService.saveCredentials(credentials);

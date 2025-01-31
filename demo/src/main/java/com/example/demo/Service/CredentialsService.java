@@ -18,8 +18,8 @@ public class CredentialsService {
         }
     }
 
-    public Credentials findCredentials(Credentials credentials){
-        return credentialsRepo.findByEmail(credentials.getEmail());
+    public Credentials findCredentials(String email){
+        return credentialsRepo.findByEmail(email);
     }
 
     public String updatePassword(String email, String newPassword) {

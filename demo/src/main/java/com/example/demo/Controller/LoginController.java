@@ -27,7 +27,7 @@ public class LoginController {
     @PostMapping("/faculty")
     public void setCredentialsForValidation(@RequestBody Credentials credentials){
         credentialEntered = credentials;
-        credentialsInDatabase = credentialsService.findCredentials(credentials);
+        credentialsInDatabase = credentialsService.findCredentials(credentials.getEmail());
     }
 
     @GetMapping("/faculty/valid")
@@ -62,7 +62,8 @@ public class LoginController {
     }
 
     @PostMapping("/faculty/detail")
-    public void setFaculty(@RequestBody String email){
+    public void setFaculty(@RequestBody Credentials credentials){
+        credentialsInDatabase = credentialsService.findCredentials(credentials.getEmail());
         faculty = facultyService.getFaculty(credentialsInDatabase);
     }
 

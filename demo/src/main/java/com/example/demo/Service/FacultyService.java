@@ -6,6 +6,7 @@ import com.example.demo.Repository.FacultyRepo;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class FacultyService {
         }
     }
 
+
     public Faculty getFaculty(Credentials credentials){
         return facultyRepo.findByCredentials(credentials);
     }
@@ -34,6 +36,7 @@ public class FacultyService {
         return facultyRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Faculty not found with email: " + email));
     }
+
 
     public Faculty updateFaculty(Faculty updatedFaculty) {
         Faculty existingFaculty = facultyRepo.findById(updatedFaculty.getEmail())
