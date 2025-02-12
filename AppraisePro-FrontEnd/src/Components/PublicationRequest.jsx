@@ -1,9 +1,10 @@
-import React, { useState , useEffect} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import '../Design/PublicationDetail.css'
+import '../Design/PublicationRequest.css'
 import { ToastContainer, toast } from 'react-toastify';
 
-const PublicationDetail = ({data}) => {
+const PublicationRequest = ({data}) => {
+
 
     const downloadPdf =async (id) => {
         try {
@@ -19,7 +20,7 @@ const PublicationDetail = ({data}) => {
             link.click();
             link.remove();
           } catch (error) {
-            toast.error("Error downloading the PDF");
+            console.error("Error downloading the PDF:", error);
           }
     }
 
@@ -49,7 +50,6 @@ const PublicationDetail = ({data}) => {
       <div className="publication-list">
         {data.map((pub) => (
           <div key={pub[0].id} className="publication-item">
-            <span className="publication-number">{pub[0].id}</span>
             <h3 className="publication-item-title">{pub[0].publicationTitle}</h3>
             <h2 className="publication-faculty-name">By {pub[1]}</h2>
             <button
@@ -78,4 +78,4 @@ const PublicationDetail = ({data}) => {
   )
 }
 
-export default PublicationDetail
+export default PublicationRequest

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Design/PublicationCard.css'
+import '../Design/PublicationList.css'
 
 const PublicationCard = ({data}) => {
   return (

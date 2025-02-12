@@ -4,7 +4,6 @@ import Footer from './Footer'
 import '../Design/FacultyPage.css'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
 
 const FacultyFormPage = () => {
 
@@ -50,7 +49,7 @@ const FacultyFormPage = () => {
     e.preventDefault();
     console.log(formData)
     try {
-      const response = await axios.post("http://localhost:8080/api/faculty/saveDetails", formData);
+      const response = await axios.post("http://localhost:8080/faculty/saveDetails", formData);
       console.log("Data submitted successfully:", response.data);
       navigate("/faculty/home")
     } catch (error) {

@@ -2,20 +2,18 @@ import React, { useState } from 'react';
 import { 
   Home, 
   FileText, 
-  Calendar, 
+  Users, 
   Settings, 
   HelpCircle,
   Menu,
   MessageSquare
 } from 'lucide-react';
-import '../Design/FacultyDashBoard.css';
+import Footer from './Footer'
+import '../Design/temp.css';
 import FacultyDashBoard from './FacultyDashBoard';
-import PublicationPage from './PublicationPage'
-import Header from './Header';
-import Footer from './Footer';
 import FacultyParticipation from './FacultyParticipation';
+import PublicationPage from './PublicationPage'
 
-const CalendarPage = () => <div className="page"><h1>Calendar Page</h1></div>;
 const Messages = () => <div className="page"><h1>Messages Page</h1></div>;
 const SettingsPage = () => <div className="page"><h1>Settings Page</h1></div>;
 const Help = () => <div className="page"><h1>Help & Support Page</h1></div>;
@@ -27,7 +25,7 @@ const FacultyHomePage = () => {
   const navItems = [
     { icon: Home, label: 'Dashboard', id: 'dashboard' },
     { icon: FileText, label: 'Publication', id: 'publication' },
-    { icon: Calendar, label: 'Participation', id: 'participation' },
+    { icon: Users, label: 'Participation', id: 'participation' },
     { icon: MessageSquare, label: 'Messages', id: 'messages' },
     { icon: Settings, label: 'Settings', id: 'settings' },
     { icon: HelpCircle, label: 'Help & Support', id: 'help' },
@@ -47,11 +45,11 @@ const FacultyHomePage = () => {
 
   return (
     <>
-    <Header />
     <div className="app">
       <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
         {/* Header */}
         <div className="sidebar-header">
+          {!collapsed && <span className="company-name">AppraisePro</span>}
           <button className="toggle-btn" onClick={() => setCollapsed(!collapsed)}>
             <Menu size={20} />
           </button>

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../Design/AddPublication.css'
 import Header from './Header';
 import Footer from './Footer';
+import researchTags from '../data/researchtags'
 
 const AddPublication = () => {
     const [publicationData , setpublicationData] = useState({
@@ -26,16 +27,10 @@ const AddPublication = () => {
 
     const handleSubmit =async (e) => {
       e.preventDefault()
-
-      if (!file) {
-        alert("Please select a file first.");
-        return;
-      }
   
       const formData = new FormData();
       formData.append("file", file);
 
-      try {
         await axios.post('http://localhost:8080/publication/addfaculty', {
           email:getEmail,
           password:""
@@ -49,9 +44,9 @@ const AddPublication = () => {
                   "Content-Type": "multipart/form-data",
                 },
               });
-              toast.success("Request for upload sent successfully");
+              toast.success("File Upload successfully!")
             } catch (error) {
-              toast.error("Publication request has made but file Upload failed!");
+              toast.error("Upload failed!");
             }
           })
           .catch((error) => {
@@ -59,12 +54,8 @@ const AddPublication = () => {
           });
         })
         .catch((e) => {
-            console.log(e)
+            toast.error('Server connection failed!!')
         })
-      
-    } catch (e) {
-      toast.error("Error fetching data! Contact Admin");
-    }
     }
 
 return (
@@ -98,6 +89,13 @@ return (
       className='pdf-input'
       required
     />
+   <label>Tag</label>
+      <select className="participation-form-select" name="type" required onChange={handleChange} multiple>
+      <option value="">Select tag type</option>
+        {
+          researchTags.map((rt) => (<option value={rt}>{rt}</option>))
+        }
+      </select>                 
   <button type="submit" className='submit-button'>Submit</button>
   <ToastContainer />
 </form>

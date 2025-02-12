@@ -55,7 +55,7 @@
     outline: none; /* Ensures no outline appears when focused */
     background-color: transparent;
     transition: all 0.2s;
-    width: 95%;
+    width: 100%;
 }
 
 .nav-link:hover {

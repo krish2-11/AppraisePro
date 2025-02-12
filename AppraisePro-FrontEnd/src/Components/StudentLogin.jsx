@@ -8,11 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import '../Design/Login.css'
 
-const FacultyLogin = () => {
+const StudentLogin = () => {
 
   const [formData , setFormData] = useState({
-    email:'',
-    password:''
+    email:''
   })
   const [errorMessage , setErrorMessage] = useState('')
   const [error , setError] = useState(false)
@@ -26,29 +25,12 @@ const FacultyLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     sessionStorage.setItem('email' , formData.email)
-    axios.post('http://localhost:8080/login/faculty', formData)
+    axios.get(`http://localhost:8080/student/login/${formData.email}`)
         .then((response) => {
-          axios.get('http://localhost:8080/login/faculty/valid')
-                .then((response) => {
-                  if(response.data == "Authenticated User"){
-                    setError(false)
-                    toast.success("Authentication Successful!")
-                    navigate("/faculty/home")
-                  }
-                  else if(response.data == "Authenticated User First"){
-                    setError(false)
-                    toast.success("Authentication Successful!")
-                    navigate("/faculty/first/changePassword")
-                  }
-                  else{
-                    setError(true)
-                    setErrorMessage(response.data)
-                  }
-                })
-                .catch((error) => {
-                  setError(true)
-                  setErrorMessage('Connection with server failed! Contact Admin!')
-                });
+          const message = response.data
+          if(message === "Authenticated"){
+            navigate("/student/home")
+          }
         })
         .catch((error) => {
           setError(true)
@@ -62,7 +44,7 @@ const FacultyLogin = () => {
         <div className="form-container">
     
     <form className='form-card' onSubmit={handleSubmit}>
-    <h1 className="form-title">Faculty Sign In</h1>
+    <h1 className="form-title">Student Sign In</h1>
       <input 
         type="email"
         name="email"
@@ -70,15 +52,6 @@ const FacultyLogin = () => {
         onChange={handleChange}
         placeholder="Enter your Email"
         className='email-input'
-        required
-      />
-      <input 
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Enter your Password"
-        className='password-input'
         required
       />
       <div>
@@ -93,4 +66,4 @@ const FacultyLogin = () => {
   )
 }
 
-export default FacultyLogin
+export default StudentLogin

@@ -1,7 +1,6 @@
 import React, { useState , useEffect} from 'react'
 import '../Design/PublicationPage.css'
 import { NavLink } from 'react-router-dom';
-
 import axios from 'axios';
 import NoPublicationPage from './NoPublicationPage';
 import PublicationCard from './PublicationCard';
@@ -52,7 +51,8 @@ const PublicationPage = () => {
         </div>
 
         <div className='publication-flex'>
-        {publications.length == 0 ? <NoPublicationPage key='1' />:<PublicationCard key='1' data={publications}/>}
+        {publications.length == 0 && <NoPublicationPage key='1' />}
+        {publications.length != 0 && <PublicationCard key='1' data={publications}/>}
         </div>
     </div>
     </>

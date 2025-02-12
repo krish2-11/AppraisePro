@@ -19,7 +19,7 @@ const AddFaculty = () => {
         e.preventDefault()
         const data = {email}
     
-        axios.post('http://localhost:8080/api/faculty/add', data)
+        axios.post('http://localhost:8080/faculty/add', data)
             .then((response) => {
               toast.success('Faculty successfully added!');
             })

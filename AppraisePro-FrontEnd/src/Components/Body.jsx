@@ -9,6 +9,7 @@ const Body = () => {
             <div className='user-card'>
                 <Card key='1' name='Administration Portal' link='/admin' url='/admin.png'/>
                 <Card key='2' name='Faculty Portal' link='/faculty/login' url='/lecture.png'/>
+                <Card key='3' name='Student Portal' link='/student/login' url='/student.png'/>
             </div>
     </div>
   )
