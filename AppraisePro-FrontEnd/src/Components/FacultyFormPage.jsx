@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import '../Design/FacultyPage.css'
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
@@ -33,8 +34,13 @@ const FacultyFormPage = () => {
     first: false,
     credentials: null
   });
+  const [photo, setPhoto] = useState(null);
 
   const navigate = useNavigate();
+
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]);
+}
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -48,14 +54,24 @@ const FacultyFormPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData)
-    try {
-      const response = await axios.post("http://localhost:8080/faculty/saveDetails", formData);
-      console.log("Data submitted successfully:", response.data);
-      navigate("/faculty/home")
-    } catch (error) {
-      console.error("Error submitting data:", error);
-      alert("Failed to save faculty data!");
+    const image = {
+        photo : photo
     }
+      await axios.post("http://localhost:8080/faculty/saveDetails", formData)
+      .then(async (res) => {
+        await axios.post("http://localhost:8080/faculty/savePhoto" , image , {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }).then((res) => {
+                toast.success("Data submitted successfully!!");
+                navigate("/faculty/home")
+          }).catch((error) => {
+                toast.error("Photo saving failed!!")
+          })
+      }).catch( (error) => {
+      toast.error("Failed to save faculty data!");
+    })
   };
 
   return (
@@ -77,6 +93,10 @@ const FacultyFormPage = () => {
                 <div className="faculty-form-group">
                     <label className="faculty-form-label required">Last Name</label>
                     <input type="text" className="form-input" name="lastname" required onChange={handleChange} />
+                </div>
+                <div className="faculty-form-group">
+                    <label className="faculty-form-label required">Profile Photo</label>
+                    <input type="file" accept='image/*' className="form-input" name="photo" required onChange={handlePhotoChange} />
                 </div>
             </div>
         </div>
@@ -233,6 +253,7 @@ const FacultyFormPage = () => {
       </div>
         </div> */}
         <button className="submit-btn" >Submit</button>
+        <ToastContainer />
     </form>
 </div>
     <Footer />

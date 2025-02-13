@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../Design/FacultyParticipation.css';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import EventCard from './EventCard';
 
 const FacultyParticipation = () => {
 
@@ -10,42 +11,21 @@ const FacultyParticipation = () => {
     const [seminar , setSeminar] = useState([])
     const [webinar , setWebinar] = useState([])
     const [conference , SetConference] = useState([])
-    useEffect( () => {
+    
+    useEffect(() => {
         axios.get("http://localhost:8080/event/getAll")
-          .then((response) => {
-            setEvent(response.data);
-            response.data.map((e) => {
-                if(e.eventType === 'Webinar'){
-                    setWebinar([
-                        ...webinar,
-                        e
-                    ])
-                }
-                else if(e.eventType === 'Seminar'){
-                    setSeminar([
-                        ...seminar,
-                        e
-                    ])
-                }
-                else if(e.eventType === 'Workshop'){
-                    setWorkshop([
-                        ...workshop,
-                        e
-                    ])
-                }
-                else if(e.eventType === 'Conference'){
-                    SetConference([
-                        ...conference,
-                        e
-                    ])
-                }
+            .then((response) => {
+                console.log("API Response:", response.data);
+                setEvent(response.data);
+                setWebinar(response.data.filter(e => e.eventType === "Webinar"));
+                setSeminar(response.data.filter(e => e.eventType === "Seminar"));
+                setWorkshop(response.data.filter(e => e.eventType === "Workshop"));
+                SetConference(response.data.filter(e => e.eventType === "Conference"));
             })
-          })
-          .catch((error) => {
-            console.error("Error fetching Events:", error);
-          });
-    } , [])
-
+            .catch((error) => {
+                console.error("Error fetching Events:", error);
+            });
+    }, []);
  
   return (
     <div className="container">
@@ -69,6 +49,10 @@ const FacultyParticipation = () => {
                     <h3>{webinar.length}</h3>
                     <p>Webinar Attended</p>
                 </div>
+                <div className="stat-item">
+                    <h3>{conference.length}</h3>
+                    <p>Conerence Attended</p>
+                </div>
             </div>
         </div>
 
@@ -79,7 +63,11 @@ const FacultyParticipation = () => {
         </div>
 
         <div className='document-flex'>
-
+            {
+                event.map((e) => (
+                    <EventCard key={e.id} event={e}/>
+                ))
+            }
         </div>
     </div>
   );

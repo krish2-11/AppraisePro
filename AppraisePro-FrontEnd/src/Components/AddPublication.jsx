@@ -6,13 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../Design/AddPublication.css'
 import Header from './Header';
 import Footer from './Footer';
-import researchTags from '../data/researchtags'
+import researchtags from '../data/researchtags'
+import { Tag } from 'lucide-react';
 
 const AddPublication = () => {
     const [publicationData , setpublicationData] = useState({
       status:'Pending',
       publicationTitle:'',
       publicationDescription:'',
+      selectedTags: []
     })
     const getEmail = sessionStorage.getItem('email')
     const [file, setFile] = useState(null);
@@ -24,6 +26,15 @@ const AddPublication = () => {
     const handleFileChange = (e) => {
       setFile(e.target.files[0]);
     }
+
+    const handleTagSelect = (tag) => {
+      setpublicationData(prev => ({
+        ...prev,
+        selectedTags: prev.selectedTags.includes(tag)
+          ? prev.selectedTags.filter(t => t !== tag)
+          : [...prev.selectedTags, tag]
+      }));
+    };
 
     const handleSubmit =async (e) => {
       e.preventDefault()
@@ -63,7 +74,7 @@ return (
   <Header />
   <div className="form-container">
   
-  <form className='form-card' onSubmit={handleSubmit}>
+  <form className='form-card-publication' onSubmit={handleSubmit}>
   <h1 className="form-title">Add Publication</h1>
     <input 
       type="text"
@@ -88,14 +99,29 @@ return (
       onChange={handleFileChange}
       className='pdf-input'
       required
-    />
-   <label>Tag</label>
-      <select className="participation-form-select" name="type" required onChange={handleChange} multiple>
-      <option value="">Select tag type</option>
-        {
-          researchTags.map((rt) => (<option value={rt}>{rt}</option>))
-        }
-      </select>                 
+    />              
+      <div className='tagSection'>
+          <label className='tagLabel'>
+            Select Tags (Multiple)
+          </label>
+          <div className='tagContainer'>
+            {researchtags.map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => handleTagSelect(tag)}
+                className={`tag ${
+                  publicationData.selectedTags.includes(tag)
+                    ?  'tagSelected'
+                    :  'tagUnselected'
+                }`}
+              >
+                <Tag className='tagIcon' />
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
   <button type="submit" className='submit-button'>Submit</button>
   <ToastContainer />
 </form>

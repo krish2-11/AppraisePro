@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const PublicationRequest = ({data}) => {
 
-
     const downloadPdf =async (id) => {
         try {
             const response = await axios.get(`http://localhost:8080/publication/download/${id}`, {
@@ -48,7 +47,8 @@ const PublicationRequest = ({data}) => {
     <div className="publication-container">
       <h2 className="publication-title">Publication Request</h2>
       <div className="publication-list">
-        {data.map((pub) => (
+        {
+          data.map((pub) => (
           <div key={pub[0].id} className="publication-item">
             <h3 className="publication-item-title">{pub[0].publicationTitle}</h3>
             <h2 className="publication-faculty-name">By {pub[1]}</h2>

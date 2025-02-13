@@ -6,18 +6,18 @@
     min-height: 70vh;
   }
   
-  .form-card {
+  .form-card-publication {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
   }
   
   .form-title {
     font-size: 1.5rem;
     margin-bottom: 20px;
     color: #2d3748;
+    text-align: center;
   }
   
   .title-input , .description-input , .pdf-input {
@@ -28,6 +28,64 @@
     border-radius: 4px;
     font-size: 1rem;
   }
+
+  .tagSection {
+    margin: 1rem 0;
+  }
+  
+  .tagLabel {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    transition: all 200ms ease-in-out;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .tag:hover {
+    opacity: 0.9;
+  }
+  
+  .tagUnselected {
+    background-color: #f3f4f6;
+    color: #374151;
+  }
+  
+  .tagUnselected:hover {
+    background-color: #e5e7eb;
+  }
+  
+  .tagSelected {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .tagSelected:hover {
+    background-color: #2563eb;
+  }
+  
+  .tagIcon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+  }
+  
   
   .submit-button {
     background-color: #38b2ac;

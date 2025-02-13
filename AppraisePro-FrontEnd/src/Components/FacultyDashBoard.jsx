@@ -29,12 +29,17 @@ const FacultyDashBoard = () => {
       };
       fetchFaculty();
     }, []);
+
+    const imageSrc = faculty.photo 
+    ? `data:image/jpeg;base64,${faculty.photo}` 
+    : "/api/placeholder/800/400";
+
   return (
     <>
     <div className="dashboard-container">
     <div className="profile-section">
       <div className="profile-photo">
-        <img src="profile-photo.jpg" alt="Faculty Photo" />
+        <img src={imageSrc} alt="Faculty Photo" />
       </div>
       <div className="profile-details">
         <h1>{faculty.firstname} {faculty.lastname}</h1>

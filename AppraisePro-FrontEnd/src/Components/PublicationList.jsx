@@ -32,22 +32,16 @@ const PublicationList = ({data}) => {
     <p className="publication-abstract">
     {pub[0].publicationDescription}
     </p>
-    <div className="tags">
-      <span className="tag">Deep Learning</span>
-      <span className="tag">NLP</span>
-      <span className="tag">Transformers</span>
-    </div>
     <h2 className="publication-faculty-name">By {pub[1]}</h2>
     <button
               onClick={() => downloadPdf(pub[0].id)}
-              className="download-button"
+              className="button-download"
             >
               Download PDF
             </button>
   </div>
 </div>)
-        }
-                
+        } 
             </>
       )
 }

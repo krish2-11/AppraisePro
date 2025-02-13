@@ -21,7 +21,8 @@ const AddDocument = () => {
      eventRole: '',
      eventDate: '',
      eventMode: '',
-     eventLocation :''
+     eventLocation :'',
+     eventTime:''
     })
     const [proof, setProof] = useState(null);
     const [slides, setSlides] = useState(null);
@@ -133,6 +134,10 @@ const AddDocument = () => {
                 <div className="participation-form-group">
                     <label className="participation-form-label required">Event Date</label>
                     <input type="date" className="date-input" name="eventDate" required onChange={handleChange}/>
+                </div>
+                <div className="participation-form-group">
+                    <label className="participation-form-label required">Event Time</label>
+                    <input type="time" className="date-input" name="eventTime" required onChange={handleChange}/>
                 </div>
                 <div className="participation-form-group">
                     <label className="participation-form-label required">Mode of conduct</label>

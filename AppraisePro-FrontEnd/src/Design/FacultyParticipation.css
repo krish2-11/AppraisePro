@@ -64,6 +64,5 @@ background-color: #38b2ac;
 
 .document-flex{
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
 }
