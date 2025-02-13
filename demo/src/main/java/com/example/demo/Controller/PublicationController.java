@@ -12,13 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/publication")
@@ -40,6 +36,7 @@ public class PublicationController {
         publicationDetail = new Publication();
         publicationDetail.setPublicationTitle(publication.getPublicationTitle());
         publicationDetail.setPublicationDescription(publication.getPublicationDescription());
+        publicationDetail.setTags(publication.getTags());
         publicationDetail.setStatus(publication.getStatus());
     }
 
@@ -65,6 +62,22 @@ public class PublicationController {
     @GetMapping("/reject/{id}")
     public void rejectPublication(@PathVariable Long id){
         publicationService.deletePublication(id);
+    }
+
+    @GetMapping("/approved")
+    public List<List<Object>> getApprovedPDFs() {
+        List<Publication> data = publicationService.getAcceptedPDFs();
+        List<List<Object>> details = new ArrayList<>();
+        for(Publication p : data){
+            String fname = p.getFaculty().getFirstname();
+            String lname = p.getFaculty().getLastname();
+            String name = fname + " " + lname;
+            List<Object> l = new ArrayList<Object>();
+            l.add(p);
+            l.add(name);
+            details.add(l);
+        }
+        return details;
     }
 
     @GetMapping("/unapproved")
@@ -93,7 +106,7 @@ public class PublicationController {
 
     @GetMapping("/download/{id}")
     public ResponseEntity<byte[]> downloadPDF(@PathVariable Long id) {
-        Publication pdf = publicationService.getUnapprovedPDFs().stream()
+        Publication pdf = publicationService.getAllPDFs().stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
                 .orElse(null);

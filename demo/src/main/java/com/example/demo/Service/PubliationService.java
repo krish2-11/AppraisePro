@@ -25,6 +25,10 @@ public class PubliationService {
         return publicationRepo.findAcceptedPublications();
     }
 
+    public List<Publication> getAllPDFs() {
+        return publicationRepo.findAll();
+    }
+
     public void updateStatus(Long id , String status){
         publicationRepo.updateStatusPublication(id , status);
     }

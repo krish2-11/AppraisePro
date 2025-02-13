@@ -11,6 +11,29 @@ public class Publication {
     private String fileName;
     private String publicationTitle;
     private String status;
+    private String[] tags;
+
+    public Publication() {
+    }
+
+    public Publication(Long id, String fileName, String publicationTitle, String status, String[] tags, String publicationDescription, byte[] fileData, Faculty faculty) {
+        this.id = id;
+        this.fileName = fileName;
+        this.publicationTitle = publicationTitle;
+        this.status = status;
+        this.tags = tags;
+        this.publicationDescription = publicationDescription;
+        this.fileData = fileData;
+        this.faculty = faculty;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
 
     public String getStatus() {
         return status;

@@ -32,11 +32,13 @@ public class Faculty {
     String personalemail;
     boolean isDisable;
     boolean first;
+    @Lob
+    private byte[] photo;
 
     public Faculty() {
     }
 
-    public Faculty(String email, String shortname, String firstname, String lastname, String fathersname, String mothersname, String spousename, String religion, String category, String gender, LocalDate birthday, String bloodgroup, String maritalStatus, String country, String caste, String hometown, String birthplace, String phone, String secodaryphone, String personalemail, boolean isDisable, boolean first, Credentials credentials, List<Publication> publication) {
+    public Faculty(String email, String shortname, String firstname, String lastname, String fathersname, String mothersname, String spousename, String religion, String category, String gender, LocalDate birthday, String bloodgroup, String maritalStatus, String country, String caste, String hometown, String birthplace, String phone, String secodaryphone, String personalemail, boolean isDisable, boolean first, byte[] photo, Credentials credentials, List<Publication> publicationList) {
         this.email = email;
         this.shortname = shortname;
         this.firstname = firstname;
@@ -59,8 +61,17 @@ public class Faculty {
         this.personalemail = personalemail;
         this.isDisable = isDisable;
         this.first = first;
+        this.photo = photo;
         this.credentials = credentials;
-        this.publicationList = publication;
+        this.publicationList = publicationList;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     public String getShortname() {

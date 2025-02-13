@@ -63,6 +63,7 @@ public class FacultyService {
             existingFaculty.setSecodaryphone(updatedFaculty.getSecodaryphone());
             existingFaculty.setPersonalemail(updatedFaculty.getPersonalemail());
             existingFaculty.setDisable(updatedFaculty.isDisable());
+            existingFaculty.setPhoto(updatedFaculty.getPhoto());
             existingFaculty.setFirst(true);
 
             // Save updated details
