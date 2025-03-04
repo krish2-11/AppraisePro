@@ -5,7 +5,9 @@ import com.example.demo.Model.Faculty;
 import com.example.demo.Service.CredentialsService;
 import com.example.demo.Service.EmailService;
 import com.example.demo.Service.FacultyService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ public class FacultyController {
 
     @Autowired
     private FacultyService facultyService;
+
 
     @Autowired
     private CredentialsService credentialsService;
@@ -54,4 +57,7 @@ public class FacultyController {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+
+
+
 }
