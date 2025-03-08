@@ -1,0 +1,61 @@
+/* Container */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+/* Card */
+.profile-card {
+  background: white;
+  padding: 20px;
+  width: 600px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Input field */
+.input-field {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Fetch Button */
+.fetch-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.fetch-button:hover {
+  background-color: #0056b3;
+}
+
+/* Profile Info */
+.profile-info {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  text-align: left;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

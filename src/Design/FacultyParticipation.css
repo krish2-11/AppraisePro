@@ -1,0 +1,68 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container h1{
+    margin-top: 20px;
+}
+
+.page-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.stats-card {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    margin: 2rem auto;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.addDocument{
+    display: flex;
+    gap:10px;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.addDocument button{
+background-color: #38b2ac;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addDocument button:hover{
+    background-color: #319795;
+}
+
+.document-flex{
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,205 @@
+/* Form Container and Sections */
+.participation-form-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.participation-form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3b82f6;
+    display: inline-block;
+}
+
+/* Grid Layout */
+.participation-form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.participation-form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* Form Groups */
+.participation-form-group {
+    margin-bottom: 1.25rem;
+}
+
+/* Labels */
+.participation-form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.required::after {
+    content: '*';
+    color: #dc2626;
+    margin-left: 4px;
+}
+
+/* Input Fields */
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-input-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.form-input-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Select Dropdowns */
+.participation-form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 0.875rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+}
+
+/* Radio Group */
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+/* Checkbox */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-input {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+}
+
+/* Date Input */
+.date-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .participation-form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .participation-form-grid, .participation-form-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .participation-form-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+.submit-btn {
+    width: 100%;
+    position: relative;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 
+                0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover Effect */
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
+                0 3px 6px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, #4338ca 0%, #2563eb 100%);
+}
+
+/* Active/Click Effect */
+.submit-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 6px rgba(50, 50, 93, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus State */
+.submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+/* Disabled State */
+.submit-btn:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
