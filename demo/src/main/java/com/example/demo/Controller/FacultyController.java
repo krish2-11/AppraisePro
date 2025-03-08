@@ -1,16 +1,17 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.AddFacultyFormDetails;
 import com.example.demo.Model.Credentials;
 import com.example.demo.Model.Faculty;
-import com.example.demo.Service.CredentialsService;
-import com.example.demo.Service.EmailService;
-import com.example.demo.Service.FacultyService;
+import com.example.demo.Service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,11 +20,13 @@ import java.util.List;
 public class FacultyController {
 
     @Autowired
-    private FacultyService facultyService;
-
-
+    FacultyService facultyService;
     @Autowired
-    private CredentialsService credentialsService;
+    CredentialsService credentialsService;
+    @Autowired
+    DepartmentService departmentService;
+    @Autowired
+    DesignationService designationService;
 
     @Autowired
     private EmailService emailService; // Inject EmailService
@@ -36,13 +39,21 @@ public class FacultyController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addFaculty(@RequestBody Faculty faculty){
+    public ResponseEntity<String> addFaculty(@RequestBody AddFacultyFormDetails addFacultyFormDetails){
         try {
-            String email = faculty.getEmail();
+            String email = addFacultyFormDetails.getEmail();
+
+            Faculty faculty = new Faculty();
+            faculty.setEmail(email);
             faculty.setFirstname(email);
+            faculty.setDepartment(departmentService.getDepartmentByName(addFacultyFormDetails.getDepartment()));
+            faculty.setDepartmentName(addFacultyFormDetails.getDepartment());
+            faculty.setDesignation(designationService.getDesignationByName(addFacultyFormDetails.getDesignation()));
+            faculty.setDesignationName(addFacultyFormDetails.getDesignation());
+            faculty.setId(addFacultyFormDetails.getFacultyid());
             int alterIndex = email.indexOf("@");
             String name = email.substring(0, alterIndex);
-            Credentials credentials = new Credentials(name, email);
+            Credentials credentials = new Credentials(name , email);
             faculty.setCredentials(credentials);
             credentialsService.saveCredentials(credentials);
             facultyService.addFaculty(faculty);
@@ -58,6 +69,16 @@ public class FacultyController {
         }
     }
 
+    @PatchMapping("/saveDetails")
+    public void saveFacultyDetails(@RequestBody Faculty faculty){
+        facultyDetail = facultyService.updateFaculty(faculty);
+    }
+
+    @PostMapping("/savePhoto")
+    public void updatePhoto(@RequestParam("photo") MultipartFile photo) throws IOException {
+        facultyDetail.setPhoto(photo.getBytes());
+        facultyService.updateFaculty(facultyDetail);
+    }
 
 
 }
