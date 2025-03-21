@@ -60,17 +60,14 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
-    @PostMapping("/faculty/detail")
-    public void setFaculty(@RequestBody Credentials credentials){
-        credentialsInDatabase = credentialsService.findCredentials(credentials.getEmail());
-        faculty = facultyService.getFaculty(credentialsInDatabase);
-    }
-
-    @GetMapping("/faculty/getfaculty")
-    public Faculty getFaculty(){
+    @GetMapping("/faculty/getfaculty/{email}")
+    public Faculty getFaculty(@PathVariable String email){
+        System.out.println(email);
+        faculty = facultyService.getFaculty(credentialsService.findCredentials(email));
+        System.out.println(faculty);
         return faculty;
     }
+
 
 
 }

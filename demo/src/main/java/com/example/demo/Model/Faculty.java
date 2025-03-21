@@ -11,6 +11,7 @@ import java.util.List;
 public class Faculty {
     @Id
     String email;
+    String Id;
     String shortname;
     String firstname;
     String lastname;
@@ -28,18 +29,47 @@ public class Faculty {
     String hometown;
     String birthplace;
     String phone;
-    String secodaryphone;
+    String secondaryphone;
     String personalemail;
     boolean isDisable;
     boolean first;
+    String departmentName;
+    String googleScholarUrl;
+
+    public String getGoogleScholarUrl() {
+        return googleScholarUrl;
+    }
+
+    public void setGoogleScholarUrl(String googleScholarUrl) {
+        this.googleScholarUrl = googleScholarUrl;
+    }
+
+    public String getDesignationName() {
+        return designationName;
+    }
+
+    public void setDesignationName(String designationName) {
+        this.designationName = designationName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    String designationName;
     @Lob
     private byte[] photo;
 
     public Faculty() {
     }
 
-    public Faculty(String email, String shortname, String firstname, String lastname, String fathersname, String mothersname, String spousename, String religion, String category, String gender, LocalDate birthday, String bloodgroup, String maritalStatus, String country, String caste, String hometown, String birthplace, String phone, String secodaryphone, String personalemail, boolean isDisable, boolean first, byte[] photo, Credentials credentials, List<Publication> publicationList) {
+    public Faculty(String email, String id, String shortname, String firstname, String lastname, String fathersname, String mothersname, String spousename, String religion, String category, String gender, LocalDate birthday, String bloodgroup, String maritalStatus, String country, String caste, String hometown, String birthplace, String phone, String secondaryphone, String personalemail, boolean isDisable, boolean first, String departmentName, String googleScholarUrl, String designationName, byte[] photo, Credentials credentials, Department department, Designation designation, List<Publication> publicationList) {
         this.email = email;
+        Id = id;
         this.shortname = shortname;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -57,12 +87,17 @@ public class Faculty {
         this.hometown = hometown;
         this.birthplace = birthplace;
         this.phone = phone;
-        this.secodaryphone = secodaryphone;
+        this.secondaryphone = secondaryphone;
         this.personalemail = personalemail;
         this.isDisable = isDisable;
         this.first = first;
+        this.departmentName = departmentName;
+        this.googleScholarUrl = googleScholarUrl;
+        this.designationName = designationName;
         this.photo = photo;
         this.credentials = credentials;
+        this.department = department;
+        this.designation = designation;
         this.publicationList = publicationList;
     }
 
@@ -202,12 +237,12 @@ public class Faculty {
         this.birthplace = birthplace;
     }
 
-    public String getSecodaryphone() {
-        return secodaryphone;
+    public String getSecondaryphone() {
+        return secondaryphone;
     }
 
-    public void setSecodaryphone(String secodaryphone) {
-        this.secodaryphone = secodaryphone;
+    public void setSecondaryphone(String secodaryphone) {
+        this.secondaryphone = secodaryphone;
     }
 
     public String getPersonalemail() {
@@ -261,10 +296,42 @@ public class Faculty {
     @OneToOne
     Credentials credentials;
 
+    @ManyToOne
+    @JsonIgnore
+    Department department;
+
+    @ManyToOne
+    @JsonIgnore
+    Designation designation;
+
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
-    //@JsonIgnore
     List<Publication> publicationList;
+
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Designation getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(Designation designation) {
+        this.designation = designation;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
 
     public List<Publication> getPublicationList() {
         return publicationList;
