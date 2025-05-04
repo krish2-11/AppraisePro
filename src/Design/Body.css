@@ -1,0 +1,53 @@
+.body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  padding: 10px;
+  text-align: center;
+  min-height: 80vh;
+  font-family: 'Markazi Text';
+  font-size: 30px;
+}
+
+.body .user-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 10px;
+}
+
+.body .user-card .card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px groove rgb(207, 199, 199);
+  padding: 20px;
+  border-radius: 10px;
+  gap: 10px;
+  width: 500px;
+}
+
+.body .user-card .card img {
+  width: 50px; 
+  min-height: 50px;
+}
+
+.sign-in{
+  background-color: #5D8736; 
+  color: white;
+  border: 1px solid black;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sign-in:hover {
+  background-color: #A9C46C;
+}
