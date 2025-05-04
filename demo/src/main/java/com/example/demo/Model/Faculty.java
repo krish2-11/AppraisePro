@@ -67,40 +67,6 @@ public class Faculty {
     public Faculty() {
     }
 
-    public Faculty(String email, String id, String shortname, String firstname, String lastname, String fathersname, String mothersname, String spousename, String religion, String category, String gender, LocalDate birthday, String bloodgroup, String maritalStatus, String country, String caste, String hometown, String birthplace, String phone, String secondaryphone, String personalemail, boolean isDisable, boolean first, String departmentName, String googleScholarUrl, String designationName, byte[] photo, Credentials credentials, Department department, Designation designation, List<Publication> publicationList) {
-        this.email = email;
-        Id = id;
-        this.shortname = shortname;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.fathersname = fathersname;
-        this.mothersname = mothersname;
-        this.spousename = spousename;
-        this.religion = religion;
-        this.category = category;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.bloodgroup = bloodgroup;
-        this.maritalStatus = maritalStatus;
-        this.country = country;
-        this.caste = caste;
-        this.hometown = hometown;
-        this.birthplace = birthplace;
-        this.phone = phone;
-        this.secondaryphone = secondaryphone;
-        this.personalemail = personalemail;
-        this.isDisable = isDisable;
-        this.first = first;
-        this.departmentName = departmentName;
-        this.googleScholarUrl = googleScholarUrl;
-        this.designationName = designationName;
-        this.photo = photo;
-        this.credentials = credentials;
-        this.department = department;
-        this.designation = designation;
-        this.publicationList = publicationList;
-    }
-
     public byte[] getPhoto() {
         return photo;
     }
@@ -293,7 +259,7 @@ public class Faculty {
         this.email = email;
     }
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     Credentials credentials;
 
     @ManyToOne

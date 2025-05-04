@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Model.Credentials;
+import com.example.demo.Model.Department;
 import com.example.demo.Model.Faculty;
 import com.example.demo.Repository.FacultyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,13 @@ public class FacultyService {
 
     @Autowired
     FacultyRepo facultyRepo;
+    @Autowired
+    DepartmentService departmentService;
 
-    public List<Faculty> getAllFaculty(){
-        return facultyRepo.findAll();
+    public List<Faculty> getAllFaculty(String department){
+        Department department1 = departmentService.getDepartmentByName(department);
+        Long d = department1.getId();
+        return facultyRepo.findByDepartment(d);
     }
 
     public void addFaculty(Faculty faculty){
@@ -64,7 +69,8 @@ public class FacultyService {
         if (f.getDepartmentName() != null) fdb.setDepartmentName(f.getDepartmentName());
         if (f.getDesignationName() != null) fdb.setDesignationName(f.getDesignationName());
         if (f.getPhoto() != null) fdb.setPhoto(f.getPhoto());
-        if (f.getGoogleScholarUrl() != null) fdb.setGoogleScholarUrl(f.getGoogleScholarUrl());
+        if(f.getGoogleScholarUrl() != null) fdb.setGoogleScholarUrl(f.getGoogleScholarUrl());
+
         // Check boolean values (avoid null values)
         fdb.setDisable(true);
         fdb.setFirst(true);

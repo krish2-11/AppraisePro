@@ -1,13 +1,18 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.LoginRequest;
+import com.example.demo.Model.Admin;
 import com.example.demo.Model.Credentials;
 import com.example.demo.Model.Faculty;
+import com.example.demo.Service.AdminService;
 import com.example.demo.Service.CredentialsService;
 import com.example.demo.Service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/login")
@@ -20,20 +25,16 @@ public class LoginController {
     @Autowired
     FacultyService facultyService;
 
+    @Autowired
+    AdminService adminService;
     Credentials credentialsInDatabase;
-    Credentials credentialEntered;
     Faculty faculty;
 
     @PostMapping("/faculty")
-    public void setCredentialsForValidation(@RequestBody Credentials credentials){
-        credentialEntered = credentials;
+    public String setCredentialsForValidation(@RequestBody Credentials credentials){
         credentialsInDatabase = credentialsService.findCredentials(credentials.getEmail());
-    }
-
-    @GetMapping("/faculty/valid")
-    public String validate(){
         if(credentialsInDatabase != null){
-            if(credentialEntered.getPassword().equals(credentialsInDatabase.getPassword())){
+            if(credentials.getPassword().equals(credentialsInDatabase.getPassword())){
                 Faculty faculty = facultyService.getFaculty(credentialsInDatabase);
                 if (!faculty.isFirst())
                 {
@@ -50,6 +51,18 @@ public class LoginController {
         return "Email not registered!";
     }
 
+    @PostMapping("/admin")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        Credentials credentials = credentialsService.findCredentials(request.getEmail());
+        if (credentials != null && request.getPassword().equals(credentials.getPassword())) {
+            Admin a = adminService.getAdmin(credentials.getEmail());
+            System.out.println(a.getEmail());
+            return ResponseEntity.ok(Map.of("message", a.getRole()));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid credentials"));
+    }
+
+
     @PostMapping("/faculty/changepassword")
     public ResponseEntity<String> setNewPassword(@RequestBody Credentials credentials){
         try {
@@ -60,6 +73,7 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
     @GetMapping("/faculty/getfaculty/{email}")
     public Faculty getFaculty(@PathVariable String email){
         System.out.println(email);
@@ -67,7 +81,6 @@ public class LoginController {
         System.out.println(faculty);
         return faculty;
     }
-
 
 
 }

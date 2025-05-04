@@ -1,13 +1,11 @@
 package com.example.demo.Controller;
 
 import com.example.demo.DTO.AddFacultyFormDetails;
+import com.example.demo.Model.Admin;
 import com.example.demo.Model.Credentials;
 import com.example.demo.Model.Faculty;
 import com.example.demo.Service.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,46 +25,35 @@ public class FacultyController {
     DepartmentService departmentService;
     @Autowired
     DesignationService designationService;
-
     @Autowired
-    private EmailService emailService; // Inject EmailService
-
+    AdminService adminService;
     Faculty facultyDetail;
 
-    @GetMapping("/getAll")
-    public List<Faculty> getAll(){
-        return facultyService.getAllFaculty();
+    @GetMapping("/getAll/{email}")
+    public List<Faculty> getAll(@PathVariable String email){
+        Admin a = adminService.getAdmin(email);
+        String department = a.getDepartment().getName();
+        return facultyService.getAllFaculty(department);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addFaculty(@RequestBody AddFacultyFormDetails addFacultyFormDetails){
-        try {
-            String email = addFacultyFormDetails.getEmail();
+    public void addFaculty(@RequestBody AddFacultyFormDetails addFacultyFormDetails){
+        String email = addFacultyFormDetails.getEmail();
 
-            Faculty faculty = new Faculty();
-            faculty.setEmail(email);
-            faculty.setFirstname(email);
-            faculty.setDepartment(departmentService.getDepartmentByName(addFacultyFormDetails.getDepartment()));
-            faculty.setDepartmentName(addFacultyFormDetails.getDepartment());
-            faculty.setDesignation(designationService.getDesignationByName(addFacultyFormDetails.getDesignation()));
-            faculty.setDesignationName(addFacultyFormDetails.getDesignation());
-            faculty.setId(addFacultyFormDetails.getFacultyid());
-            int alterIndex = email.indexOf("@");
-            String name = email.substring(0, alterIndex);
-            Credentials credentials = new Credentials(name , email);
-            faculty.setCredentials(credentials);
-            credentialsService.saveCredentials(credentials);
-            facultyService.addFaculty(faculty);
-
-            // 🎯 Send Welcome Email
-            String subject = "Welcome to Our Platform!";
-            String loginUrl = "http://localhost:3000/faculty/login"; // Update if needed
-            emailService.sendEmail(email, subject, name, loginUrl);
-
-            return ResponseEntity.ok("Faculty added and email sent!");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+        Faculty faculty = new Faculty();
+        faculty.setEmail(email);
+        faculty.setFirstname(email);
+        faculty.setDepartment(departmentService.getDepartmentByName(addFacultyFormDetails.getDepartment()));
+        faculty.setDepartmentName(addFacultyFormDetails.getDepartment());
+        faculty.setDesignation(designationService.getDesignationByName(addFacultyFormDetails.getDesignation()));
+        faculty.setDesignationName(addFacultyFormDetails.getDesignation());
+        faculty.setId(addFacultyFormDetails.getFacultyid());
+        int alterIndex = email.indexOf("@");
+        String name = email.substring(0, alterIndex);
+        Credentials credentials = new Credentials(name , email);
+        faculty.setCredentials(credentials);
+        credentialsService.saveCredentials(credentials);
+        facultyService.addFaculty(faculty);
     }
 
     @PatchMapping("/saveDetails")
@@ -75,10 +62,9 @@ public class FacultyController {
     }
 
     @PostMapping("/savePhoto")
-    public void updatePhoto(@RequestParam("photo") MultipartFile photo) throws IOException {
+    public void updatePhoto(@RequestParam("photo")MultipartFile photo) throws IOException {
         facultyDetail.setPhoto(photo.getBytes());
         facultyService.updateFaculty(facultyDetail);
     }
-
 
 }
